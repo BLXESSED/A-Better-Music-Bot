@@ -4,15 +4,15 @@ module.exports = {
     async execute(message, args, cmd, client, Discord){
 
         const newEmbed1 = new Discord.MessageEmbed()
-        .setColor("#008a96")
+        .setColor("#FFFFFF")
         .setTitle("Help")
-        .setDescription("You can find all the commands on this panel. [Click here for more information](http://lofidiscordbot.ga/)")
+        .setDescription("You can find all the commands on this panel. [Click here for more information]()")
         .addFields(
-            {name: '**<a:spinning_record:829476153626066946> Radio**', value: "`-play, -stop, -join`"},
-            {name: '**<a:gearSpinning:829476153533923329> Utilities**', value: "`-ping, -invite, -support, -vote`"},
-            {name: '**<:Invite:829493633576206356> Invite**', value: "Click [here](https://discord.com/oauth2/authorize?client_id=822696668750151751&scope=bot&permissions=573754624) to invite LofiBot to your server"},
-            {name: '**<:Support:829493633560477766> Support**', value: "Join our [support server](https://discord.gg/BDQG47pP7k) if you would like to see future announcements or just need some assistance using our discord bot"},
-            {name: '**<:Vote:829493633534263306> Vote**', value: "We'll really appreciate it if you can vote for our bot on [top.gg](https://top.gg/bot/822696668750151751/vote)"},
+            {name: '** Music**', value: "`-play, skip, stop, join`"},
+            {name: '** Utilities**', value: "`-ping, -invite, -support, -vote`"},
+            {name: '**<:Invite:829493633576206356> Invite**', value: "Click [here]() to invite LofiBot to your server"},
+            {name: '**<:Support:829493633560477766> Support**', value: "Join our [support server](https://discord.gg/) if you would like to see future announcements or just need some assistance using our discord bot"},
+            {name: '**<:Vote:829493633534263306> Vote**', value: "We'll really appreciate it if you can vote for our bot on [top.gg](https://top.gg/bot//vote)"},
         )
 
         message.channel.send(newEmbed1)

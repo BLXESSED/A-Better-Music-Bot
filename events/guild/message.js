@@ -1,6 +1,6 @@
 module.exports = async (Discord, client, message) => {
 
-    const prefix = process.env.PREFIX;
+    const prefix = "m!";
 
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 

@@ -6,14 +6,14 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 'join', 'leave'],
+    aliases: ['skip', 'stop', 'join'],
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord, profileData){
 
         const newEmbed1 = new Discord.MessageEmbed()
         .setColor("#FFFFFF")
         .setTitle("Help")
-        .setDescription("`c!play [song/youtube link]`")
+        .setDescription("`m!play [song/youtube link]`")
 
         const newEmbed2 = new Discord.MessageEmbed()
         .setColor("#FF0000")
@@ -53,17 +53,12 @@ module.exports = {
         const newEmbed13 = new Discord.MessageEmbed()
         .setColor("#FF0000")
         .setTitle("🎶 Music")
-        .setDescription(`Bye!`)
+        .setDescription(`Leaving...`)
 
         const newEmbed14 = new Discord.MessageEmbed()
         .setColor("#008000")
         .setTitle("🎶 Music")
         .setDescription(`Joining...`)
-
-        const newEmbed15 = new Discord.MessageEmbed()
-        .setColor("#008000")
-        .setTitle("🎶 Music")
-        .setDescription(`Leaving...`)
 
         const voice_channel = message.member.voice.channel;
         if (!voice_channel) return message.channel.send(newEmbed2);
@@ -162,7 +157,7 @@ const video_player = async (guild, song) => {
         queue.delete(guild.id);
         return;
     }
-    const stream = ytdl(song.url, { filter: 'audioonly' });
+    const stream = ytdl(song.url);
     song_queue.connection.play(stream, { seek: 0, volume: 0.5 })
     .on('finish', () => {
         song_queue.songs.shift();
