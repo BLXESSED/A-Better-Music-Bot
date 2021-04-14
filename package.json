@@ -1,0 +1,29 @@
+{
+  "name": "luna",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BLXESSED/chat-bot.git"
+  },
+  "author": "Rahim A",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BLXESSED/chat-bot/issues"
+  },
+  "homepage": "https://github.com/BLXESSED/chat-bot#readme",
+  "dependencies": {
+    "@discordjs/opus": "^0.5.0",
+    "discord.js": "^12.5.3",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-static": "^4.3.0",
+    "fs": "^0.0.1-security",
+    "topgg-autoposter": "^1.1.9",
+    "yt-search": "^2.7.6",
+    "ytdl-core": "^4.5.0"
+  }
+}
