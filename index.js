@@ -59,16 +59,4 @@ ap.on('posted', () => {
 })
 }, 3600000);
 
-client.on('voiceStateUpdate', (oldState, newState) => {
-
-  if (oldState.channelID !==  oldState.guild.me.voice.channelID || newState.channel)
-    return;
-
-  if (!oldState.channel.members.size - 1) 
-    setTimeout(() => { 
-      if (!oldState.channel.members.size - 1) 
-         oldState.channel.leave(); 
-     }, 300000);
-});
-
 client.login(process.env.TOKEN);

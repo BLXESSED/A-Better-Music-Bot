@@ -167,6 +167,19 @@ const video_player = async (guild, song) => {
     .setTitle("🎶 Music")
     .setDescription(`Now playing **${song.title}**`)
     await song_queue.text_channel.send(newEmbed20)
+
+    client.on('voiceStateUpdate', (oldState, newState) => {
+
+        if (oldState.channelID !==  oldState.guild.me.voice.channelID || newState.channel)
+          return;
+      
+        if (!oldState.channel.members.size - 1) 
+          setTimeout(() => { 
+            if (!oldState.channel.members.size - 1) 
+               oldState.channel.leave();
+               queue.delete(guild.id);
+           }, 300000);
+      });
 }
 
 const skip_song = (message, server_queue) => {
