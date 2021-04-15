@@ -13,7 +13,7 @@ activities_list = [
   "-help", 
   "-help", 
   "join the support server, -support", 
-  `lofi hip hop in ${client.guilds.cache.size.toLocaleString()} servers!`,
+  `music in ${client.guilds.cache.size.toLocaleString()} servers!`,
   "use -invite to add me",
   "use -vote to support me"
   ]
@@ -32,7 +32,7 @@ client.once('ready', () => {
     const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); 
     client.user.setActivity(activities_list[index], { type: activities_type[index] });
 }, 3000); 
-    console.log(`LofiBot has ${client.users.cache.size} users, in ${client.guilds.cache.size} servers!`);
+    console.log(`Music Bot has ${client.users.cache.size} users, in ${client.guilds.cache.size} servers!`);
 });
 
 setInterval(async function(){
