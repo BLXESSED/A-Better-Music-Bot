@@ -10,12 +10,12 @@ client.events = new Discord.Collection();
 });
 
 activities_list = [
-  "-help", 
-  "-help", 
+  "m!help", 
+  "m!help", 
   "join the support server, -support", 
   `music in ${client.guilds.cache.size.toLocaleString()} servers!`,
-  "use -invite to add me",
-  "use -vote to support me"
+  "use m!invite to add me",
+  "use m!vote to support me"
   ] 
 
 const activities_type = [
@@ -38,12 +38,12 @@ client.once('ready', () => {
 setInterval(async function(){
 
   activities_list = [
-    "-help", 
-    "-help", 
-    "join the support server, -support", 
+    "m!help", 
+    "m!help", 
+    "join the support server, m!support", 
     `lofi hip hop in ${client.guilds.cache.size.toLocaleString()} servers!`,
-    "use -invite to add me",
-    "use -vote to support me"
+    "use m!invite to add me",
+    "use m!vote to support me"
     ]
     
 }, 1000);
