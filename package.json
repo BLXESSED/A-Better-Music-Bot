@@ -1,0 +1,26 @@
+{
+  "name": "music-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BLXESSED/Music-Bot.git"
+  },
+  "author": "Rahim A",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BLXESSED/Music-Bot/issues"
+  },
+  "homepage": "https://github.com/BLXESSED/Music-Bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "fs": "*",
+    "topgg-autoposter": "^1.1.10",
+    "yt-search": "^2.7.6",
+    "ytdl-core": "^4.5.0"
+  }
+}
