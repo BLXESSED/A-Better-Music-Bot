@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const ytSearch = require('yt-search');
+var { getData, getPreview } = require("spotify-url-info");
 
 const queue = new Map();
 
@@ -72,8 +73,23 @@ module.exports = {
             let song = {};
 
             if (ytdl.validateURL(args[0])) {
-                const song_info = await ytdl.getInfo(args[0]);
-                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
+                try{
+                    const spotify = await getPreview(args[0]);
+                    const video_finder = async (query) =>{
+                        const video_result = await ytSearch(query);
+                        return (video_result.videos.length > 1) ? video_result.videos[0] : null;
+                    }
+    
+                    const video = await video_finder(spotify.title);
+                    if (video){
+                        song = { title: video.title, url: video.url }
+                    } else {
+                         message.channel.send(newEmbed4);
+                    }
+                }catch(err){
+                    const song_info = await ytdl.getInfo(args[0]);
+                    song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
+                }
             } else {
                 const video_finder = async (query) =>{
                     const video_result = await ytSearch(query);

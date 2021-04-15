@@ -19,6 +19,7 @@
   "dependencies": {
     "@discordjs/opus": "^0.5.0",
     "discord.js": "^12.5.3",
+    "spotify-url-info": "^2.2.0",
     "topgg-autoposter": "^1.1.10",
     "yt-search": "^2.7.6",
     "ytdl-core": "^4.5.0"
