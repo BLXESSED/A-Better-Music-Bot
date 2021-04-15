@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/BLXESSED/Music-Bot#readme",
   "dependencies": {
+    "@discordjs/opus": "^0.5.0",
     "discord.js": "^12.5.3",
     "fs": "*",
     "topgg-autoposter": "^1.1.10",
