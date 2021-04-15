@@ -103,7 +103,7 @@ module.exports = {
                 try {
                     const connection = await voice_channel.join();
                     queue_constructor.connection = connection;
-                    video_player(message.guild, queue_constructor.songs[0]);
+                    video_player(message.guild, queue_constructor.songs[0], client);
                 } catch (err) {
                     queue.delete(message.guild.id);
                     const newEmbed11 = new Discord.MessageEmbed()
@@ -149,7 +149,7 @@ module.exports = {
     
 }
 
-const video_player = async (guild, song) => {
+const video_player = async (guild, song, client) => {
     const song_queue = queue.get(guild.id);
 
     if (!song) {
