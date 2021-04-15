@@ -16,7 +16,7 @@ activities_list = [
   `music in ${client.guilds.cache.size.toLocaleString()} servers!`,
   "use -invite to add me",
   "use -vote to support me"
-  ]
+  ] 
 
 const activities_type = [
   "LISTENING", 
