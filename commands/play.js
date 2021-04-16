@@ -14,7 +14,7 @@ module.exports = {
         const newEmbed1 = new Discord.MessageEmbed()
         .setColor("#FFFFFF")
         .setTitle("Help")
-        .setDescription("`m!play [song/youtube link]`")
+        .setDescription("`m!play [song/youtube or spotify link]`")
 
         const newEmbed2 = new Discord.MessageEmbed()
         .setColor("#FF0000")
@@ -80,11 +80,11 @@ module.exports = {
                         return (video_result.videos.length > 1) ? video_result.videos[0] : null;
                     }
     
-                    const video = await video_finder(spotify.title);
+                    const video = await video_finder(spotify.title.join(' '));
                     if (video){
                         song = { title: video.title, url: video.url }
                     } else {
-                         message.channel.send(newEmbed4);
+                         return message.channel.send(newEmbed4);
                     }
                 }catch(err){
                     const song_info = await ytdl.getInfo(args[0]);
