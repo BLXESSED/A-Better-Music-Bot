@@ -194,17 +194,24 @@ const video_player = async (guild, song, client) => {
         queue.delete(guild.id);
         return;
     }
+
     const stream = ytdl(song.url);
     song_queue.connection.play(stream, { seek: 0, volume: 0.5 })
     .on('finish', () => {
         song_queue.songs.shift();
         video_player(guild, song_queue.songs[0]);
     });
+
     const newEmbed20 = new Discord.MessageEmbed()
     .setColor("#FFFFFF")
     .setTitle("🎶 Music")
     .setDescription(`Now playing **${song.title}**`)
     await song_queue.text_channel.send(newEmbed20)
+
+    const newEmbed21 = new Discord.MessageEmbed()
+    .setColor("#FFFFFF")
+    .setTitle("🎶 Music")
+    .setDescription(`The voice channel is empty. Stopping the music...`)
 
     client.on('voiceStateUpdate', (oldState, newState) => {
 
@@ -216,6 +223,7 @@ const video_player = async (guild, song, client) => {
             if (!oldState.channel.members.size - 1) 
                oldState.channel.leave();
                queue.delete(guild.id);
+               await song_queue.text_channel.send(newEmbed21)
            }, 300000);
       });
 }
