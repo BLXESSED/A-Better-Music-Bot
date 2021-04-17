@@ -7,7 +7,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 'join'],
+    aliases: ['skip', 'stop', 'join', 'playlist'],
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord, profileData){
 
@@ -160,6 +160,8 @@ module.exports = {
                 console.log(err)
                 message.channel.send(newEmbed6)
             }
+        }else if(cmd === 'playlist'){
+
         }
     }
     
