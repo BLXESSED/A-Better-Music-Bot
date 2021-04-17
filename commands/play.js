@@ -226,7 +226,7 @@ const video_player = async (guild, song, client) => {
             if (!oldState.channel.members.size - 1) 
                oldState.channel.leave();
                queue.delete(guild.id);
-               await song_queue.text_channel.send(newEmbed21)
+               song_queue.text_channel.send(newEmbed21)
            }, 300000);
       });
 }
