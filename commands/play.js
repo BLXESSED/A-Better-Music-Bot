@@ -72,27 +72,27 @@ module.exports = {
             if (!args.length) return message.channel.send(newEmbed1);
             let song = {};
 
+            try{
+                const spotify = await getPreview(args[0]);
+                const video_finder = async (query) =>{
+                    const video_result = await ytSearch(query);
+                    return (video_result.videos.length > 1) ? video_result.videos[0] : null;
+                }
+
+                const video = await video_finder(spotify.track);
+                if (video){
+                    song = { title: video.title, url: video.url, thumbnail: spotify.image }
+                } else {
+                    message.channel.send(newEmbed4);
+                    console.log(spotify.track)
+                }    
+            }catch(err){
+
             if (ytdl.validateURL(args[0])) {
-                try{
-                    const spotify = await getPreview(args[0]);
-                    const video_finder = async (query) =>{
-                        const video_result = await ytSearch(query);
-                        return (video_result.videos.length > 1) ? video_result.videos[0] : null;
-                    }
-    
-                    const video = await video_finder(spotify.track);
-                    if (video){
-                        song = { title: video.title, url: video.url, thumbnail: spotify.image }
-                    } else {
-                        message.channel.send(newEmbed4);
-                        console.log(spotify.track)
-                    }    
-                }catch(err){
                     const spotify = await getPreview(args[0]);
                     if (!spotify){
                     const song_info = await ytdl.getInfo(args[0]);
                     song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url, thumbnail: song_info.videoDetails.thumbnail_url }
-                    }
                 }
             } else {
                 const video_finder = async (query) =>{
@@ -107,6 +107,7 @@ module.exports = {
                      message.channel.send(newEmbed4);
                 }
             }
+        }
 
             if (!server_queue){
 
