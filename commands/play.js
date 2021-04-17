@@ -84,8 +84,8 @@ module.exports = {
                     if (video){
                         song = { title: video.title, url: video.url }
                     } else {
-                        console.log(spotify.track)
                         message.channel.send(newEmbed4);
+                        console.log(spotify.track)
                     }    
                 }catch(err){
                     const spotify = await getPreview(args[0]);
