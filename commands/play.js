@@ -79,7 +79,7 @@ module.exports = {
                     const video_result = await ytSearch(query);
                         return (video_result.videos.length > 1) ? video_result.videos[0] : null;
                     }
-        
+            
                     const video = await video_finder(spotify.title);
                     if (video){
                         song = { title: video.title, url: video.url }
@@ -87,6 +87,7 @@ module.exports = {
                         message.channel.send(newEmbed4);
                     }
                 }catch(err){
+                    console.log(err)
                     const spotify = await getPreview(args[0]);
                     if (!spotify){
                     const song_info = await ytdl.getInfo(args[0]);
