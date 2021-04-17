@@ -87,7 +87,8 @@ module.exports = {
                          return message.channel.send(newEmbed4);
                     }
                 }catch(err){
-                    if (!video){
+                    const spotify = await getPreview(args[0]);
+                    if (!spotify){
                     const song_info = await ytdl.getInfo(args[0]);
                     song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
                     }
