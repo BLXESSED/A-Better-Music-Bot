@@ -87,8 +87,10 @@ module.exports = {
                          return message.channel.send(newEmbed4);
                     }
                 }catch(err){
+                    if (!video){
                     const song_info = await ytdl.getInfo(args[0]);
                     song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
+                    }
                 }
             } else {
                 const video_finder = async (query) =>{
@@ -162,6 +164,21 @@ module.exports = {
             }
         }else if(cmd === 'playlist'){
 
+            const newEmbed15 = new Discord.MessageEmbed()
+            .setColor("#FF0000")
+            .setTitle("🎶 Music")
+            .setDescription('I could not find that playlist (Check if you sent a valid link)')
+
+            if (ytdl.validateURL(args[0])) {
+                try{
+            const result = await getTracks(args[0]);
+            console.log(result[0].name);
+                }catch(err){
+
+                }
+            }else{
+                return message.channel.send
+            }
         }
     }
     
