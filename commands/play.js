@@ -130,6 +130,7 @@ module.exports = {
                     const newEmbed11 = new Discord.MessageEmbed()
                     .setColor("#008000")
                     .setTitle("🎶 Music")
+                    .setThumbnail(song.thumbnail)
                     .setDescription(`Now playing **${song.title}**`)
                     message.channel.send(newEmbed11);
                     throw err;
@@ -139,6 +140,7 @@ module.exports = {
                 const newEmbed5 = new Discord.MessageEmbed()
                 .setColor("#008000")
                 .setTitle("🎶 Music")
+                .setThumbnail(song.thumbnail)
                 .setDescription(`**${song.title}** added to queue!`)
                 return message.channel.send(newEmbed5);
             }
@@ -205,6 +207,7 @@ const video_player = async (guild, song, client) => {
     const newEmbed20 = new Discord.MessageEmbed()
     .setColor("#FFFFFF")
     .setTitle("🎶 Music")
+    .setThumbnail(song.thumbnail)
     .setDescription(`Now playing **${song.title}**`)
     await song_queue.text_channel.send(newEmbed20)
 
