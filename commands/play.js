@@ -80,7 +80,7 @@ module.exports = {
                         return (video_result.videos.length > 1) ? video_result.videos[0] : null;
                     }
     
-                    const video = await video_finder(spotify.title.join(' '));
+                    const video = await video_finder(spotify.title);
                     if (video){
                         song = { title: video.title, url: video.url }
                     } else {
