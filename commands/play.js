@@ -82,7 +82,7 @@ module.exports = {
     
                     const video = await video_finder(spotify.track);
                     if (video){
-                        song = { title: video.title, url: video.url }
+                        song = { title: video.title, url: video.url, thumbnail: spotify.image }
                     } else {
                         message.channel.send(newEmbed4);
                         console.log(spotify.track)
@@ -91,7 +91,7 @@ module.exports = {
                     const spotify = await getPreview(args[0]);
                     if (!spotify){
                     const song_info = await ytdl.getInfo(args[0]);
-                    song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
+                    song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url, thumbnail: song_info.videoDetails.thumbnail_url }
                     }
                 }
             } else {
@@ -102,7 +102,7 @@ module.exports = {
 
                 const video = await video_finder(args.join(' '));
                 if (video){
-                    song = { title: video.title, url: video.url }
+                    song = { title: video.title, url: video.url, thumbnail: video.thumbnail_url }
                 } else {
                      message.channel.send(newEmbed4);
                 }
