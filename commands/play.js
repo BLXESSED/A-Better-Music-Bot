@@ -231,10 +231,7 @@ const video_player = async (guild, song, client) => {
         }
 
            if (oldState.channelID === null){
-            setTimeout(() => { 
-                if (oldState.channelID === null)
                 console.log("Someone Joined!")
-               }, 300000);
         }
       });
 }
