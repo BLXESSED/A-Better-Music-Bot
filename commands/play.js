@@ -221,13 +221,21 @@ const video_player = async (guild, song, client) => {
         if (oldState.channelID !==  oldState.guild.me.voice.channelID || newState.channel)
           return;
       
-        if (!oldState.channel.members.size - 1) 
+        if (!oldState.channel.members.size - 1){
           setTimeout(() => { 
             if (!oldState.channel.members.size - 1) 
                oldState.channel.leave();
                queue.delete(guild.id);
                song_queue.text_channel.send(newEmbed21)
            }, 300000);
+        }
+
+           if (oldState.channelID === null){
+            setTimeout(() => { 
+                if (oldState.channelID === null)
+                console.log("Someone Joined!")
+               }, 300000);
+        }
       });
 }
 
