@@ -218,7 +218,7 @@ const video_player = async (guild, song, client) => {
 
     client.on('voiceStateUpdate', (oldState, newState) => {
 
-        if (oldState.channelID !==  oldState.guild.me.voice.channelID || newState.channel)
+        if (oldState.channelID !==  oldState.guild.me.voice.channelID)
           return;
       
         if (!oldState.channel.members.size - 1){
@@ -230,7 +230,7 @@ const video_player = async (guild, song, client) => {
            }, 300000);
         }
 
-           if (oldState.channelID === null){
+           if (!newState.channel){
                 console.log("Someone Joined!")
         }
       });
