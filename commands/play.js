@@ -169,11 +169,6 @@ module.exports = {
             }
         }else if(cmd === 'playlist'){
 
-            const newEmbed15 = new Discord.MessageEmbed()
-            .setColor("#FF0000")
-            .setTitle("🎶 Music")
-            .setDescription('I could not find that playlist (Check if you sent a valid link)')
-
             if (ytdl.validateURL(args[0])) {
                 try{
             const result = await getTracks(args[0]);
@@ -182,7 +177,11 @@ module.exports = {
 
                 }
             }else{
-                return message.channel.send
+                const newEmbed15 = new Discord.MessageEmbed()
+                .setColor("#FF0000")
+                .setTitle("🎶 Music")
+                .setDescription('I could not find that playlist (Check if you sent a valid link)')
+                return message.channel.send(newEmbed15)
             }
         }
     }
