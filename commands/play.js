@@ -14,7 +14,7 @@ module.exports = {
         const newEmbed1 = new Discord.MessageEmbed()
         .setColor("#FFFFFF")
         .setTitle("Help")
-        .setDescription("`m!play [song/youtube or spotify link]`")
+        .setDescription("`m!play [song name or youtube/spotify link]`")
 
         const newEmbed2 = new Discord.MessageEmbed()
         .setColor("#FF0000")
@@ -88,12 +88,21 @@ module.exports = {
                 }    
             }catch(err){
 
+            if(message.content.includes("https://www.youtube.com/watch?v=")){
+                const link = "l!test https://www.youtube.com/watch?v=";
+                const test = message.content.substring(link.length).split(/ +/);
+                console.log(test)
+            }else if(message.content.includes("https://youtu.be/")){
+                const link = "l!test https://youtu.be/";
+                const test = message.content.substring(link.length).split(/ +/);
+                console.log(test)
+            }else{
+                 console.log("search")
+            }
+
             if (ytdl.validateURL(args[0])) {
-                    const spotify = await getPreview(args[0]);
-                    if (!spotify){
-                    const song_info = await ytdl.getInfo(args[0]);
-                    song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url, thumbnail: song_info.videoDetails.thumbnail_url }
-                }
+                const song_info = await ytdl.getInfo(args[0]);
+                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
             } else {
                 const video_finder = async (query) =>{
                     const video_result = await ytSearch(query);
@@ -210,11 +219,6 @@ const video_player = async (guild, song, client) => {
     .setDescription(`Now playing **${song.title}**`)
     await song_queue.text_channel.send(newEmbed20)
 
-    const newEmbed21 = new Discord.MessageEmbed()
-    .setColor("#FFFFFF")
-    .setTitle("🎶 Music")
-    .setDescription(`The voice channel is empty. Stopping the music...`)
-
     client.on('voiceStateUpdate', (oldState, newState) => {
 
         if (oldState.channelID !==  oldState.guild.me.voice.channelID || newState.channel)
@@ -224,7 +228,6 @@ const video_player = async (guild, song, client) => {
           setTimeout(async () => { 
             if (!oldState.channel.members.size - 1) 
                oldState.channel.leave();
-               song_queue.text_channel.send(newEmbed21)
                await queue.delete(guild.id);
            }, 300000);
         }
