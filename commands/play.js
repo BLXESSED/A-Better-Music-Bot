@@ -7,7 +7,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 'join', 'playlist', 'pause', 'resume' ],
+    aliases: ['skip', 'stop', 'join', 'playlist', 'queue' ],
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord, profileData){
 
@@ -178,6 +178,16 @@ module.exports = {
                 .setColor("#FF0000")
                 .setTitle("🎶 Music")
                 .setDescription('I could not find that playlist (Check if you sent a valid link)')
+                return message.channel.send(newEmbed15)
+            }
+        }else if(cmd === 'queue'){
+            if(!server_queue){
+                message.channel.send(newEmbed10)
+            }else{
+                const newEmbed15 = new Discord.MessageEmbed()
+                .setColor("#FFFFFF")
+                .setTitle("🎶 Music")
+                .setDescription(server_queue.songs)
                 return message.channel.send(newEmbed15)
             }
         }
