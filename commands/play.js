@@ -222,11 +222,11 @@ const video_player = async (guild, song, client) => {
           return;
       
         if (!oldState.channel.members.size - 1){
-          setTimeout(() => { 
+          setTimeout(async () => { 
             if (!oldState.channel.members.size - 1) 
                oldState.channel.leave();
-               queue.delete(guild.id);
                song_queue.text_channel.send(newEmbed21)
+               await queue.delete(guild.id);
            }, 300000);
         }
       });
