@@ -88,21 +88,9 @@ module.exports = {
                 }    
             }catch(err){
 
-            if(message.content.includes("https://www.youtube.com/watch?v=")){
-                const link = "l!test https://www.youtube.com/watch?v=";
-                const test = message.content.substring(link.length).split(/ +/);
-                console.log(test)
-            }else if(message.content.includes("https://youtu.be/")){
-                const link = "l!test https://youtu.be/";
-                const test = message.content.substring(link.length).split(/ +/);
-                console.log(test)
-            }else{
-                 console.log("search")
-            }
-
             if (ytdl.validateURL(args[0])) {
                 const song_info = await ytdl.getInfo(args[0]);
-                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
+                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url, thumbnail: video.thumbnail_url }
             } else {
                 const video_finder = async (query) =>{
                     const video_result = await ytSearch(query);
