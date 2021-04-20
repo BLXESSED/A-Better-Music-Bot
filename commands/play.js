@@ -90,7 +90,7 @@ module.exports = {
 
             if (ytdl.validateURL(args[0])) {
                 const song_info = await ytdl.getInfo(args[0]);
-                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url, thumbnail: video.thumbnail_url }
+                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url, thumbnail: song_info.thumbnail_url }
             } else {
                 const video_finder = async (query) =>{
                     const video_result = await ytSearch(query);
