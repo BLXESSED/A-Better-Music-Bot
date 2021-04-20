@@ -7,7 +7,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 'join', 'playlist', 'queue' ],
+    aliases: ['skip', 'stop', 'join', 'playlist', 'getqueue' ],
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord, profileData){
 
@@ -180,7 +180,7 @@ module.exports = {
                 .setDescription('I could not find that playlist (Check if you sent a valid link)')
                 return message.channel.send(newEmbed15)
             }
-        }else if(cmd === 'queue'){
+        }else if(cmd === 'getqueue'){
             if(!server_queue){
                 message.channel.send(newEmbed10)
             }else{
