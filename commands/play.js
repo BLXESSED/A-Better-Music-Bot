@@ -128,7 +128,7 @@ module.exports = {
                     throw err;
                 }
             } else{
-                if(server_queue.songs[10]) return message.channel.send(newEmbed16)
+                if(server_queue.songs[50]) return message.channel.send(newEmbed16)
                 server_queue.songs.push(song);
                 const newEmbed5 = new Discord.MessageEmbed()
                 .setColor("#008000")
@@ -182,12 +182,12 @@ module.exports = {
                 if(server_queue.songs[1]){
                     const newEmbed15 = new Discord.MessageEmbed()
                     .setColor("#FFFFFF")
-                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\nRequested by ${server_queue.songs[0].request}\n\n**Playing Next:**\n${server_queue.songs[1].title}\nRequested by ${server_queue.songs[1].request}`)
+                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\n*Requested by ${server_queue.songs[0].request}*\n\n**Playing Next:**\n${server_queue.songs[1].title}\n*Requested by ${server_queue.songs[1].request}*`)
                     return message.channel.send(newEmbed15)
                 }else{
                     const newEmbed15 = new Discord.MessageEmbed()
                     .setColor("#FFFFFF")
-                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\nRequested by ${server_queue.songs[0].request}`)
+                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\n*Requested by ${server_queue.songs[0].request}*`)
                     return message.channel.send(newEmbed15)
                 }
             }
