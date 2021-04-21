@@ -9,7 +9,7 @@ module.exports = {
     name: 'play',
     aliases: ['skip', 'stop', 'join', 'playlist', 'getqueue' ],
     description: 'Advanced music bot',
-    async execute(message, args, cmd, client, Discord, profileData){
+    async execute(message, args, cmd, client, Discord){
 
         const newEmbed1 = new Discord.MessageEmbed()
         .setColor("#FFFFFF")
@@ -187,7 +187,7 @@ module.exports = {
                 const newEmbed15 = new Discord.MessageEmbed()
                 .setColor("#FFFFFF")
                 .setTitle("🎶 Music")
-                .setDescription(server_queue.songs)
+                .setDescription(server_queue.songs.title)
                 return message.channel.send(newEmbed15)
             }
         }
