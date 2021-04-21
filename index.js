@@ -13,7 +13,7 @@ activities_list = [
   "m!help", 
   "m!help", 
   "join the support server, -support", 
-  `music in ${client.guilds.cache.size.toLocaleString()} servers!`,
+  `music in ${client.guilds.cache.size.toLocaleString()}/100 servers!`,
   "use m!invite to add me",
   "use m!vote to support me"
   ] 
@@ -41,7 +41,7 @@ setInterval(async function(){
     "m!help", 
     "m!help", 
     "join the support server, m!support", 
-    `music in ${client.guilds.cache.size.toLocaleString()} servers!`,
+    `music in ${client.guilds.cache.size.toLocaleString()}/100 servers!`,
     "use m!invite to add me",
     "use m!vote to support me"
     ]
