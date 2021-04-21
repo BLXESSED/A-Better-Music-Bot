@@ -51,6 +51,10 @@ module.exports = {
         .setColor("#008000")
         .setDescription(`Joining...`)
 
+        const newEmbed16 = new Discord.MessageEmbed()
+        .setColor("#FF0000")
+        .setDescription("Too many song are already in queue.")
+
         const voice_channel = message.member.voice.channel;
         if (!voice_channel) return message.channel.send(newEmbed2);
         const permissions = voice_channel.permissionsFor(message.client.user);
@@ -60,6 +64,9 @@ module.exports = {
 
         if (cmd === 'play'){
             if (!args.length) return message.channel.send(newEmbed1);
+
+            if(server_queue.songs[10]) return message.channel.send(newEmbed16)
+
             let song = {};
 
             try{
