@@ -65,8 +65,6 @@ module.exports = {
         if (cmd === 'play'){
             if (!args.length) return message.channel.send(newEmbed1);
 
-            if(server_queue.songs[10]) return message.channel.send(newEmbed16)
-
             let song = {};
 
             try{
@@ -130,6 +128,7 @@ module.exports = {
                     throw err;
                 }
             } else{
+                if(server_queue.songs[10]) return message.channel.send(newEmbed16)
                 server_queue.songs.push(song);
                 const newEmbed5 = new Discord.MessageEmbed()
                 .setColor("#008000")
