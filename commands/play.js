@@ -176,12 +176,12 @@ module.exports = {
                 if(server_queue.songs[1]){
                     const newEmbed15 = new Discord.MessageEmbed()
                     .setColor("#FFFFFF")
-                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\n\n**Playing Next:**\n${server_queue.songs[1].title}`)
+                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\nRequested by ${song.request}\n\n**Playing Next:**\n${server_queue.songs[1].title}\nRequested by ${song.request}`)
                     return message.channel.send(newEmbed15)
                 }else{
                     const newEmbed15 = new Discord.MessageEmbed()
                     .setColor("#FFFFFF")
-                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}`)
+                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\nRequested by ${song.request}`)
                     return message.channel.send(newEmbed15)
                 }
             }
