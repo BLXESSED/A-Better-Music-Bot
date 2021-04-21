@@ -171,7 +171,7 @@ module.exports = {
             if(!server_queue){
                 message.channel.send(newEmbed10)
             }else{
-                if(server_queue.songs[1].title){
+                if(server_queue.songs[1]){
                     const newEmbed15 = new Discord.MessageEmbed()
                     .setColor("#FFFFFF")
                     .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\n**Playing Next:**\n${server_queue.songs[1].title}`)
