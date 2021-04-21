@@ -41,7 +41,7 @@ setInterval(async function(){
     "m!help", 
     "m!help", 
     "join the support server, m!support", 
-    `lofi hip hop in ${client.guilds.cache.size.toLocaleString()} servers!`,
+    `music in ${client.guilds.cache.size.toLocaleString()} servers!`,
     "use m!invite to add me",
     "use m!vote to support me"
     ]
