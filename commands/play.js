@@ -71,7 +71,7 @@ module.exports = {
 
                 const video = await video_finder(spotify.track);
                 if (video){
-                    song = { title: video.title, url: video.url, thumbnail: spotify.image }
+                    song = { title: video.title, url: video.url, thumbnail: spotify.image, request: message.author.id }
                 } else {
                     message.channel.send(newEmbed4);
                     console.log(spotify.track)
@@ -80,7 +80,7 @@ module.exports = {
 
             if (ytdl.validateURL(args[0])) {
                 const song_info = await ytdl.getInfo(args[0]);
-                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url, thumbnail: song_info.thumbnail_url }
+                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url, thumbnail: song_info.thumbnail_url, request: message.author.id  }
             } else {
                 const video_finder = async (query) =>{
                     const video_result = await ytSearch(query);
@@ -89,7 +89,7 @@ module.exports = {
 
                 const video = await video_finder(args.join(' '));
                 if (video){
-                    song = { title: video.title, url: video.url, thumbnail: video.thumbnail_url }
+                    song = { title: video.title, url: video.url, thumbnail: video.thumbnail_url, request: message.author.id  }
                 } else {
                      message.channel.send(newEmbed4);
                 }
@@ -118,6 +118,7 @@ module.exports = {
                     .setColor("#008000")
                     .setThumbnail(song.thumbnail)
                     .setDescription(`Now playing **${song.title}**`)
+                    .setFooter(song.request)
                     message.channel.send(newEmbed11);
                     throw err;
                 }
@@ -127,6 +128,7 @@ module.exports = {
                 .setColor("#008000")
                 .setThumbnail(song.thumbnail)
                 .setDescription(`**${song.title}** added to queue!`)
+                .setFooter(song.request)
                 return message.channel.send(newEmbed5);
             }
         }
@@ -174,13 +176,13 @@ module.exports = {
                 if(server_queue.songs[1]){
                     const newEmbed15 = new Discord.MessageEmbed()
                     .setColor("#FFFFFF")
-                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\n**Playing Next:**\n${server_queue.songs[1].title}`)
+                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\n\n**Playing Next:**\n${server_queue.songs[1].title}`)
                     return message.channel.send(newEmbed15)
                 }else{
-                const newEmbed15 = new Discord.MessageEmbed()
-                .setColor("#FFFFFF")
-                .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}`)
-                return message.channel.send(newEmbed15)
+                    const newEmbed15 = new Discord.MessageEmbed()
+                    .setColor("#FFFFFF")
+                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}`)
+                    return message.channel.send(newEmbed15)
                 }
             }
         }
@@ -207,6 +209,7 @@ const video_player = async (guild, song, client) => {
     .setColor("#FFFFFF")
     .setThumbnail(song.thumbnail)
     .setDescription(`Now playing **${song.title}**`)
+    .setFooter(song.request)
     await song_queue.text_channel.send(newEmbed20)
 
     client.on('voiceStateUpdate', (oldState, newState) => {
