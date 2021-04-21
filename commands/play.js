@@ -187,7 +187,7 @@ module.exports = {
                 const newEmbed15 = new Discord.MessageEmbed()
                 .setColor("#FFFFFF")
                 .setTitle("🎶 Music")
-                .setDescription(server_queue.songs.title)
+                .setDescription(server_queue.songs[0].title)
                 return message.channel.send(newEmbed15)
             }
         }
