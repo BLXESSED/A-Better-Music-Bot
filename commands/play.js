@@ -7,58 +7,48 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 'join', 'playlist', 'getqueue' ],
+    aliases: ['skip', 'stop', 'join', 'playlist', 'nowplaying' ],
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord){
 
         const newEmbed1 = new Discord.MessageEmbed()
         .setColor("#FFFFFF")
-        .setTitle("Help")
         .setDescription("`m!play [song name or youtube/spotify link]`")
 
         const newEmbed2 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setTitle("🎶 Music")
         .setDescription('You need to be in a voice channel to execute this command!')
 
         const newEmbed3 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setTitle("🎶 Music")
         .setDescription('You dont have the correct permissions')
 
         const newEmbed4 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setTitle("🎶 Music")
         .setDescription('I could not find that song/video')
 
         const newEmbed6 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setTitle("🎶 Music")
         .setDescription('I can not connect to that voice channel. Please try again later')
 
         const newEmbed8 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setTitle("🎶 Music")
         .setDescription('You need to be in a channel to execute this command!')
 
         const newEmbed9 = new Discord.MessageEmbed()
-        .setColor("#FF0000")
-        .setTitle("🎶 Music")
+        .setColor("#FF0000")    
         .setDescription(`There are no songs in queue`)
 
         const newEmbed10 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setTitle("🎶 Music")
         .setDescription(`There is nothing playing`)
 
         const newEmbed13 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setTitle("🎶 Music")
         .setDescription(`Leaving...`)
 
         const newEmbed14 = new Discord.MessageEmbed()
         .setColor("#008000")
-        .setTitle("🎶 Music")
         .setDescription(`Joining...`)
 
         const voice_channel = message.member.voice.channel;
@@ -126,7 +116,6 @@ module.exports = {
                     queue.delete(message.guild.id);
                     const newEmbed11 = new Discord.MessageEmbed()
                     .setColor("#008000")
-                    .setTitle("🎶 Music")
                     .setThumbnail(song.thumbnail)
                     .setDescription(`Now playing **${song.title}**`)
                     message.channel.send(newEmbed11);
@@ -136,7 +125,6 @@ module.exports = {
                 server_queue.songs.push(song);
                 const newEmbed5 = new Discord.MessageEmbed()
                 .setColor("#008000")
-                .setTitle("🎶 Music")
                 .setThumbnail(song.thumbnail)
                 .setDescription(`**${song.title}** added to queue!`)
                 return message.channel.send(newEmbed5);
@@ -176,19 +164,24 @@ module.exports = {
             }else{
                 const newEmbed15 = new Discord.MessageEmbed()
                 .setColor("#FF0000")
-                .setTitle("🎶 Music")
                 .setDescription('I could not find that playlist (Check if you sent a valid link)')
                 return message.channel.send(newEmbed15)
             }
-        }else if(cmd === 'getqueue'){
+        }else if(cmd === 'nowplaying'){
             if(!server_queue){
                 message.channel.send(newEmbed10)
             }else{
+                if(server_queue.songs[1].title){
+                    const newEmbed15 = new Discord.MessageEmbed()
+                    .setColor("#FFFFFF")
+                    .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}\n**Playing Next:**\n${server_queue.songs[1].title}`)
+                    return message.channel.send(newEmbed15)
+                }else{
                 const newEmbed15 = new Discord.MessageEmbed()
                 .setColor("#FFFFFF")
-                .setTitle("🎶 Music")
-                .setDescription(server_queue.songs[0].title)
+                .setDescription(`**Now Playing:**\n${server_queue.songs[0].title}`)
                 return message.channel.send(newEmbed15)
+                }
             }
         }
     }
@@ -212,7 +205,6 @@ const video_player = async (guild, song, client) => {
 
     const newEmbed20 = new Discord.MessageEmbed()
     .setColor("#FFFFFF")
-    .setTitle("🎶 Music")
     .setThumbnail(song.thumbnail)
     .setDescription(`Now playing **${song.title}**`)
     await song_queue.text_channel.send(newEmbed20)
