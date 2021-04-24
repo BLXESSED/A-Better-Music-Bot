@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const ytSearch = require('yt-search');
 var { getData, getPreview } = require("spotify-url-info");
+var ytpl = require('ytpl');
 
 const queue = new Map();
 
@@ -164,17 +165,19 @@ module.exports = {
             }
         }else if(cmd === 'playlist'){
 
-            if (ytdl.validateURL(args[0])) {
+            if (ytdl.validateURL(args[0])){
                 try{
-            const result = await getTracks(args[0]);
-            console.log(result[0].name);
+                const playlist = await getTracks(args[0])
                 }catch(err){
-
+                const playlist = await ytpl(args[0]);
                 }
+
+                console.log(playlist)
+
             }else{
                 const newEmbed15 = new Discord.MessageEmbed()
                 .setColor("#FF0000")
-                .setDescription('I could not find that playlist (Check if you sent a valid link)')
+                .setDescription('I could not find that playlist')
                 return message.channel.send(newEmbed15)
             }
         }else if(cmd === 'nowplaying'){
