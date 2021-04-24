@@ -87,7 +87,7 @@ module.exports = {
 
             if (ytdl.validateURL(args[0])) {
                 const song_info = await ytdl.getInfo(args[0]);
-                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url, thumbnail: song_info.player_response.videoDetails.thumbnail.thumbnails, request: message.author.tag  }
+                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url, thumbnail: `https://img.youtube.com/vi/${song_info.videoId}/maxresdefault.jpg`, request: message.author.tag  }
             } else {
                 const video_finder = async (query) =>{
                     const video_result = await ytSearch(query);
@@ -96,7 +96,7 @@ module.exports = {
 
                 const video = await video_finder(args.join(' '));
                 if (video){
-                    song = { title: video.title, url: video.url, thumbnail: video.thumbnail_url, request: message.author.tag  }
+                    song = { title: video.title, url: video.url, thumbnail: `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`, request: message.author.tag  }
                 } else {
                      message.channel.send(newEmbed4);
                 }
