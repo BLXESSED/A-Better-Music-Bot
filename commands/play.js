@@ -46,10 +46,12 @@ module.exports = {
         const newEmbed13 = new Discord.MessageEmbed()
         .setColor("#FF0000")
         .setDescription(`Stopping...`)
+        .setFooter(`Stopped by ${message.author.tag}`)
 
         const newEmbed14 = new Discord.MessageEmbed()
         .setColor("#008000")
         .setDescription(`Joining...`)
+        .setFooter(`${message.author.tag} has requested the bot to join a new channel`)
 
         const newEmbed16 = new Discord.MessageEmbed()
         .setColor("#FF0000")
