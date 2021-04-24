@@ -169,9 +169,12 @@ module.exports = {
                 const playlist = await getTracks(args[0])
                 console.log(playlist)
             }catch(err){
+                console.log(err)
                 if (ytdl.validateURL(args[0])){
                 const playlist = await ytpl(args[0]);
-                console.log(playlist)
+                console.log(playlist.items.title)
+                console.log(playlist.items.url)
+                console.log(playlist.items.id)
                 }else{
                 const newEmbed15 = new Discord.MessageEmbed()
                 .setColor("#FF0000")
