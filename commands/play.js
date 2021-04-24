@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const ytSearch = require('yt-search');
-var { getData, getPreview } = require("spotify-url-info");
+var { getTracks, getData, getPreview } = require("spotify-url-info");
 var ytpl = require('ytpl');
 
 const queue = new Map();
@@ -172,6 +172,7 @@ module.exports = {
                 console.log(err)
                 if (ytdl.validateURL(args[0])){
                 const playlist = await ytpl(args[0]);
+                console.log(playlist.items)
                 console.log(playlist.items.title)
                 console.log(playlist.items.url)
                 console.log(playlist.items.id)
