@@ -167,9 +167,11 @@ module.exports = {
 
             try{
                 const playlist = await getTracks(args[0])
+                console.log(playlist)
             }catch(err){
                 if (ytdl.validateURL(args[0])){
                 const playlist = await ytpl(args[0]);
+                console.log(playlist)
                 }else{
                 const newEmbed15 = new Discord.MessageEmbed()
                 .setColor("#FF0000")
@@ -177,8 +179,6 @@ module.exports = {
                 return message.channel.send(newEmbed15)
                 }
             }
-
-                console.log(playlist)
 
         }else if(cmd === 'nowplaying'){
             if(!server_queue){
