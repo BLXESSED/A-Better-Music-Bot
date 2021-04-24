@@ -168,6 +168,7 @@ module.exports = {
             try{
                 const playlist = await getTracks(args[0])
                 console.log(playlist)
+                console.log(playlist.album.name)
             }catch(err){
                 console.log(err)
                 if (ytdl.validateURL(args[0])){
