@@ -165,21 +165,21 @@ module.exports = {
             }
         }else if(cmd === 'playlist'){
 
-            if (ytdl.validateURL(args[0])){
-                try{
+            try{
                 const playlist = await getTracks(args[0])
-                }catch(err){
+            }catch(err){
+                if (ytdl.validateURL(args[0])){
                 const playlist = await ytpl(args[0]);
-                }
-
-                console.log(playlist)
-
-            }else{
+                }else{
                 const newEmbed15 = new Discord.MessageEmbed()
                 .setColor("#FF0000")
                 .setDescription('I could not find that playlist')
                 return message.channel.send(newEmbed15)
+                }
             }
+
+                console.log(playlist)
+
         }else if(cmd === 'nowplaying'){
             if(!server_queue){
                 message.channel.send(newEmbed10)
