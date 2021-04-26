@@ -8,7 +8,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 'join', 'playlist', 'nowplaying' ],
+    aliases: ['skip', 'stop', 'join', 'nowplaying' ],
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord){
 
@@ -163,28 +163,6 @@ module.exports = {
                 console.log(err)
                 message.channel.send(newEmbed6)
             }
-        }else if(cmd === 'playlist'){
-
-            try{
-                const playlist = await getTracks(args[0])
-                console.log(playlist)
-                console.log(playlist.album.name)
-            }catch(err){
-                console.log(err)
-                if (ytdl.validateURL(args[0])){
-                const playlist = await ytpl(args[0]);
-                console.log(playlist.items)
-                console.log(playlist.items.title)
-                console.log(playlist.items.url)
-                console.log(playlist.items.id)
-                }else{
-                const newEmbed15 = new Discord.MessageEmbed()
-                .setColor("#FF0000")
-                .setDescription('I could not find that playlist')
-                return message.channel.send(newEmbed15)
-                }
-            }
-
         }else if(cmd === 'nowplaying'){
             if(!server_queue){
                 message.channel.send(newEmbed10)
