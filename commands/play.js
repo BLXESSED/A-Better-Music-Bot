@@ -231,5 +231,6 @@ const skip_song = (message, server_queue) => {
 
 const stop_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send(newEmbed2);
-    server_queue.connection.dispatcher.destroy();
+    server_queue.songs = [];
+    server_queue.connection.dispatcher.end();
 }
