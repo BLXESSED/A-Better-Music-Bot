@@ -50,7 +50,7 @@ setInterval(async function(){
 
 const AutoPoster = require('topgg-autoposter')
 
-const ap = AutoPoster(process.env.TOPGG_TOKEN, client)
+const ap = AutoPoster("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzMjA2MzcwNTAyMTI4NDM2MiIsImJvdCI6dHJ1ZSwiaWF0IjoxNjIxMjk0Mzk4fQ.IhCLvmjV97aMQzCw9k6FY_uYt0ZA3Bel-AH1Xl6CYFY", client)
 
 setInterval(async function(){
 
