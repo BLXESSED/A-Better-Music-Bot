@@ -125,7 +125,7 @@ module.exports = {
                     const newEmbed11 = new Discord.MessageEmbed()
                     .setColor("#008000")
                     .setThumbnail(song.thumbnail)
-                    .setDescription(`Now playing **${song.title}**`)
+                    .setDescription(`Now playing **${song.title}**\n\nIf you enjoy using A Better Music Bot, please vote for our bot on [top.gg](https://top.gg/bot/832063705021284362/vote) to help keep our service free`)
                     .setFooter(`Requested by ${song.request}`)
                     message.channel.send(newEmbed11);
                     throw err;
@@ -136,7 +136,7 @@ module.exports = {
                 const newEmbed5 = new Discord.MessageEmbed()
                 .setColor("#008000")
                 .setThumbnail(song.thumbnail)
-                .setDescription(`**${song.title}** added to queue!`)
+                .setDescription(`**${song.title}** added to queue!\n\nIf you enjoy using A Better Music Bot, please vote for our bot on [top.gg](https://top.gg/bot/832063705021284362/vote) to help keep our service free`)
                 .setFooter(`Requested by ${song.request}`)
                 return message.channel.send(newEmbed5);
             }
@@ -202,7 +202,7 @@ const video_player = async (guild, song, client) => {
     const newEmbed20 = new Discord.MessageEmbed()
     .setColor("#FFFFFF")
     .setThumbnail(song.thumbnail)
-    .setDescription(`Now playing **${song.title}**`)
+    .setDescription(`Now playing **${song.title}**\n\nIf you enjoy using A Better Music Bot, please vote for our bot on [top.gg](https://top.gg/bot/832063705021284362/vote) to help keep our service free`)
     .setFooter(`Requested by ${song.request}`)
     await song_queue.text_channel.send(newEmbed20)
 
