@@ -117,7 +117,7 @@ module.exports = {
                 queue_constructor.songs.push(song);
     
                 try {
-                    const connection = await voice_channel.join().then(connection => {connection.voice.setSelfDeaf(true)});
+                    const connection = await voice_channel.join();
                     queue_constructor.connection = connection;
                     video_player(message.guild, queue_constructor.songs[0], client);
                 } catch (err) {
