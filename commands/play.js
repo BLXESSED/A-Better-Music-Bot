@@ -8,7 +8,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 'join', 'nowplaying' ],
+    aliases: ['skip', 'stop', 'join', 'nowplaying', 'leave' ],
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord){
 
@@ -57,6 +57,11 @@ module.exports = {
         const newEmbed16 = new Discord.MessageEmbed()
         .setColor("#FF0000")
         .setDescription("Too many song are already in queue.")
+
+        const newEmbed17 = new Discord.MessageEmbed()
+        .setColor("#FF0000")
+        .setDescription(`Leaving...`)
+        .setFooter(`${message.author.tag} has requested the bot to leave the current channel`)
 
         const voice_channel = message.member.voice.channel;
         if (!voice_channel) return message.channel.send(newEmbed2);
@@ -145,20 +150,27 @@ module.exports = {
             if(!server_queue){
                 message.channel.send(newEmbed10)
             }else{
-            skip_song(message, server_queue);
+                skip_song(message, server_queue);
             }
         }
         else if(cmd === 'stop'){
             if(!server_queue){
                 message.channel.send(newEmbed10)
             }else{
-            stop_song(message, server_queue);
-            message.channel.send(newEmbed13)
+                stop_song(message, server_queue);
+                message.channel.send(newEmbed13)
+            }
+        }else if(cmd === 'leave'){
+            if(!server_queue){
+                message.channel.send(newEmbed10)
+            }else{
+                stop_song(message, server_queue);
+                message.channel.send(newEmbed17)
             }
         }else if(cmd === 'join'){
             try{
             voice_channel.join();
-            message.channel.send(newEmbed14)
+                message.channel.send(newEmbed14)
             }catch(err){
                 console.log(err)
                 message.channel.send(newEmbed6)
