@@ -162,9 +162,11 @@ module.exports = {
             }
         }else if(cmd === 'leave'){
             if(!server_queue){
+                voice_channel.leave()
                 message.channel.send(newEmbed10)
             }else{
                 stop_song(message, server_queue);
+                voice_channel.leave()
                 message.channel.send(newEmbed17)
             }
         }else if(cmd === 'join'){
