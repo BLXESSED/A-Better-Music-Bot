@@ -166,6 +166,7 @@ module.exports = {
             }else{
                 stop_song(message, server_queue);
                 message.channel.send(newEmbed17)
+                server_queue.voice_channel.leave()
             }
         }else if(cmd === 'join'){
             try{
