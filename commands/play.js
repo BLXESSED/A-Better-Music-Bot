@@ -222,7 +222,7 @@ const video_player = async (guild, song, client) => {
     .setThumbnail(song.thumbnail)
     .setDescription(`Now playing **${song.title}**\n\nIf you enjoy using A Better Music Bot, please vote for our bot on [top.gg](https://top.gg/bot/832063705021284362/vote) to help keep our service free`)
     .setFooter(`Requested by ${song.request}`)
-    let messageEmbed = song_queue.text_channel.send(newEmbed20)
+    let messageEmbed = await song_queue.text_channel.send(newEmbed20)
       await messageEmbed.react(ResumeEmoji);
       await messageEmbed.react(PauseEmoji);
       
