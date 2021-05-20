@@ -75,6 +75,8 @@ module.exports = {
 
             let song = {};
 
+            message.channel.send("🔎 Searching for `" + args.join(' ') + "`")
+
             try{
                 const spotify = await getPreview(args[0]);
                 const video_finder = async (query) =>{
@@ -206,20 +208,50 @@ const video_player = async (guild, song, client) => {
     }
 
     const stream = ytdl(song.url, { filter: 'audio' });
-    song_queue.connection.play(stream, { seek: 0, volume: 0.5 })
+    let player = song_queue.connection.play(stream, { seek: 0, volume: 0.5 })
     .on('finish', () => {
         song_queue.songs.shift();
         video_player(guild, song_queue.songs[0]);
     });
 
-    const newEmbed20 = new Discord.MessageEmbed()
+    const ResumeEmoji = '▶️';
+    const PauseEmoji = '⏸️';
+
+    let newEmbed20 = new Discord.MessageEmbed()
     .setColor("#FFFFFF")
     .setThumbnail(song.thumbnail)
     .setDescription(`Now playing **${song.title}**\n\nIf you enjoy using A Better Music Bot, please vote for our bot on [top.gg](https://top.gg/bot/832063705021284362/vote) to help keep our service free`)
     .setFooter(`Requested by ${song.request}`)
-    await song_queue.text_channel.send(newEmbed20)
+    let messageEmbed = song_queue.text_channel.send(newEmbed20)
+      await messageEmbed.react(ResumeEmoji);
+      await messageEmbed.react(PauseEmoji);
+      
+      client.on('messageReactionAdd', async (reaction, user) => {
+          if (reaction.message.partial) await reaction.message.fetch();
+          if (reaction.partial) await reaction.fetch();
+          if (user.bot) return;
+          if (!reaction.message.guild) return;
 
-    client.on('voiceStateUpdate', (oldState, newState) => {
+          if (reaction.message.channel.id == song_queue.text_channel.id) {
+              if (reaction.emoji.name === ResumeEmoji) {
+                messageEmbed.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+                await player.resume()
+                await messageEmbed.react(ResumeEmoji);
+                await messageEmbed.react(PauseEmoji);
+              }
+              if (reaction.emoji.name === PauseEmoji) {
+                messageEmbed.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+                await player.pause()
+                await messageEmbed.react(ResumeEmoji);
+                await messageEmbed.react(PauseEmoji);
+              }
+          } else {
+              return;
+          }
+
+      });
+
+      client.on('voiceStateUpdate', (oldState, newState) => {
 
         if (oldState.channelID !==  oldState.guild.me.voice.channelID || newState.channel)
           return;
@@ -232,6 +264,7 @@ const video_player = async (guild, song, client) => {
            }, 300000);
         }
       });
+
 }
 
 const skip_song = (message, server_queue) => {
