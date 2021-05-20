@@ -234,12 +234,12 @@ const video_player = async (guild, song, client) => {
 
           if (reaction.message.channel.id == song_queue.text_channel.id) {
               if (reaction.emoji.name === ResumeEmoji) {
-                await player.resume()
-                await reaction.users.remove(user);
+                player.resume()
+                reaction.users.remove(user);
               }
               if (reaction.emoji.name === PauseEmoji) {
-                await player.pause()
-                await reaction.users.remove(user);
+                player.pause()
+                reaction.users.remove(user);
               }
           } else {
               return;
