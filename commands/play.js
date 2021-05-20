@@ -234,16 +234,12 @@ const video_player = async (guild, song, client) => {
 
           if (reaction.message.channel.id == song_queue.text_channel.id) {
               if (reaction.emoji.name === ResumeEmoji) {
-                messageEmbed.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+                messageEmbed.reactions.get(ResumeEmoji).remove(user);
                 await player.resume()
-                await messageEmbed.react(ResumeEmoji);
-                await messageEmbed.react(PauseEmoji);
               }
               if (reaction.emoji.name === PauseEmoji) {
-                messageEmbed.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+                messageEmbed.reactions.get(PauseEmoji).remove(user);
                 await player.pause()
-                await messageEmbed.react(ResumeEmoji);
-                await messageEmbed.react(PauseEmoji);
               }
           } else {
               return;
