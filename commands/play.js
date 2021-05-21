@@ -8,7 +8,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 'join', 'nowplaying', 'leave' ],
+    aliases: ['skip', 'stop', 'join', 'nowplaying', 'leave', 'resume', 'pause' ],
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord){
 
@@ -56,12 +56,22 @@ module.exports = {
 
         const newEmbed16 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setDescription("Too many song are already in queue.")
+        .setDescription("Too many song are already in queue")
 
         const newEmbed17 = new Discord.MessageEmbed()
         .setColor("#FF0000")
         .setDescription(`Leaving...`)
         .setFooter(`${message.author.tag} has requested the bot to leave the current channel`)
+
+        const newEmbed18 = new Discord.MessageEmbed()
+        .setColor("#008000")
+        .setDescription(`⏸️ Paused`)
+        .setFooter(`Paused by ${message.author.tag}`)
+
+        const newEmbed19 = new Discord.MessageEmbed()
+        .setColor("#008000")
+        .setDescription(`▶️ Resumed`)
+        .setFooter(`Resumed by ${message.author.tag}`)
 
         const voice_channel = message.member.voice.channel;
         if (!voice_channel) return message.channel.send(newEmbed2);
@@ -194,6 +204,12 @@ module.exports = {
                     return message.channel.send(newEmbed15)
                 }
             }
+        }else if(cmd === 'pause'){
+            server_queue.connection.dispatcher.pause()
+            message.channel.send(newEmbed18)
+        }else if(cmd === 'resume'){
+            server_queue.connection.dispatcher.resume()
+            message.channel.send(newEmbed19)
         }
     }
     
