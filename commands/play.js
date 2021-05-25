@@ -208,8 +208,40 @@ module.exports = {
             if(!server_queue){
                 message.channel.send(newEmbed10)
             }else{
-                stop_song(message, server_queue);
-                message.channel.send(newEmbed13)
+                if(voice_channel.members.size > 3){
+
+                    const requiredToStop_notRounded = voice_channel.members.size * 0.75
+                    const requiredToStop = Math.floor(requiredToStop_notRounded)
+
+                    const newEmbed21 = new Discord.MessageEmbed()
+                    .setColor("#008000")
+                    .setTitle(`⏭️ Vote Stop`)
+                    .setDescription(`Click the ✅ if you would like the bot to stop playing music, otherwise click the ❌`)
+                    .setFooter(`Requested by ${message.author.tag} | Require ${requiredToStop} people to vote ✅`)
+                    const messageEmbed = await message.channel.send(newEmbed21)
+                    messageEmbed.react('✅');
+                    messageEmbed.react('❌');
+                    setTimeout(function(){ 
+
+                        messageEmbed.delete()
+
+                        const wantToStop = messageEmbed.reactions.cache.get('✅').count
+
+                        if(wantToStop > requiredToStop){
+                            message.channel.send(newEmbed13)
+                            stop_song(message, server_queue);
+                        }else{
+                            const newEmbed22 = new Discord.MessageEmbed()
+                            .setColor("#FF0000")
+                            .setDescription(`❌ Vote stop was unsuccessful`)
+                            .setFooter(`Requested by ${message.author.tag}`)
+                            message.channel.send(newEmbed22)
+                        }
+                    }, 5000);
+                }else{
+                    message.channel.send(newEmbed13)
+                    stop_song(message, server_queue);
+                }
             }
         }else if(cmd === 'leave'){
             if(!server_queue){
