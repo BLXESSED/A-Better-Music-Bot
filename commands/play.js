@@ -170,7 +170,7 @@ module.exports = {
             }else{
                 if(voice_channel.members.size > 3){
 
-                    const requiredToSkip_notRounded = 1
+                    const requiredToSkip_notRounded = voice_channel.members.size * 0.75
                     const requiredToSkip = Math.floor(requiredToSkip_notRounded)
 
                     const newEmbed21 = new Discord.MessageEmbed()
@@ -187,7 +187,7 @@ module.exports = {
 
                         const wantToSkip = messageEmbed.reactions.cache.get('✅').count
 
-                        if(wantToSkip >= requiredToSkip){
+                        if(wantToSkip > requiredToSkip){
                             message.channel.send(newEmbed23)
                             skip_song(message, server_queue);
                         }else{
@@ -197,7 +197,7 @@ module.exports = {
                             .setFooter(`Requested by ${message.author.tag}`)
                             message.channel.send(newEmbed22)
                         }
-                    }, 7000);
+                    }, 5000);
                 }else{
                     message.channel.send(newEmbed23)
                     skip_song(message, server_queue);
