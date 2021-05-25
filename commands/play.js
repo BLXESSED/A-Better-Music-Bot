@@ -170,7 +170,8 @@ module.exports = {
             }else{
                 if(voice_channel.members.size > 3){
 
-                    const requiredToSkip_notRounded = voice_channel.members.size * 0.75
+                    const people  = voice_channel.members.size - 1
+                    const requiredToSkip_notRounded = people * 0.75
                     const requiredToSkip = Math.floor(requiredToSkip_notRounded)
 
                     const newEmbed21 = new Discord.MessageEmbed()
@@ -210,8 +211,9 @@ module.exports = {
             }else{
                 if(voice_channel.members.size > 3){
 
-                    const requiredToStop_notRounded = voice_channel.members.size * 0.75
-                    const requiredToStop = Math.floor(requiredToStop_notRounded)
+                    const people  = voice_channel.members.size - 1
+                    const requiredToStop_notRounded = people * 0.75
+                    const requiredToStop = Math.floor(requiredToStop_notRounded) 
 
                     const newEmbed21 = new Discord.MessageEmbed()
                     .setColor("#008000")
@@ -282,24 +284,33 @@ module.exports = {
             server_queue.connection.dispatcher.resume()
             message.channel.send(newEmbed19)
         }else if(cmd === 'forceskip'){
-            if(permissions.has('MANAGE_CHANNELS')){
-                message.channel.send(newEmbed23)
-                skip_song(message, server_queue);
+            if(!server_queue){
+                message.channel.send(newEmbed10)
             }else{
                 const newEmbed24 = new Discord.MessageEmbed()
                 .setColor("#FF0000")
                 .setDescription('You need to have the `MANAGE_CHANNELS` permission to force skip songs')
                 message.channel.send(newEmbed24)
-            }
-        }else if(cmd === 'forcestop'){
-            if(permissions.has('MANAGE_CHANNELS')){
+
+                const permissions = voice_channel.permissionsFor(message.client.user);
+                if(!permissions.has('MANAGE_CHANNELS')) return message.channel.send(newEmbed24)
+                    
                 message.channel.send(newEmbed23)
                 skip_song(message, server_queue);
+            }
+        }else if(cmd === 'forcestop'){
+            if(!server_queue){
+                message.channel.send(newEmbed10)
             }else{
                 const newEmbed24 = new Discord.MessageEmbed()
                 .setColor("#FF0000")
                 .setDescription('You need to have the `MANAGE_CHANNELS` permission to use this command')
-                message.channel.send(newEmbed24)
+
+                const permissions = voice_channel.permissionsFor(message.client.user);
+                if(!permissions.has('MANAGE_CHANNELS')) return message.channel.send(newEmbed24)
+
+                message.channel.send(newEmbed13)
+                stop_song(message, server_queue);
             }
         }
     }
