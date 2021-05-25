@@ -170,7 +170,7 @@ module.exports = {
             }else{
                 if(voice_channel.members.size > 3){
 
-                    const requiredToSkip_notRounded = voice_channel.members.size * 0.75
+                    const requiredToSkip_notRounded = 1
                     const requiredToSkip = Math.floor(requiredToSkip_notRounded)
 
                     const newEmbed21 = new Discord.MessageEmbed()
