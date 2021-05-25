@@ -185,7 +185,7 @@ module.exports = {
 
                         messageEmbed.delete()
 
-                        const wantToSkip = messageEmbed.reactions.cache.get('✅')
+                        const wantToSkip = messageEmbed.reactions.cache.get('✅').count
 
                         if(wantToSkip >= requiredToSkip){
                             message.channel.send(newEmbed23)
