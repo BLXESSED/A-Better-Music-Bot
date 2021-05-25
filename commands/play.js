@@ -8,7 +8,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 'join', 'nowplaying', 'leave', 'resume', 'pause' ],
+    aliases: ['skip', 'stop', 'join', 'nowplaying', 'leave', 'resume', 'pause', 'p' ],
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord){
 
@@ -52,7 +52,7 @@ module.exports = {
         const newEmbed14 = new Discord.MessageEmbed()
         .setColor("#008000")
         .setDescription(`Joining...`)
-        .setFooter(`${message.author.tag} has requested the bot to join a new channel`)
+        .setFooter(`Requested by ${message.author.tag}`)
 
         const newEmbed16 = new Discord.MessageEmbed()
         .setColor("#FF0000")
@@ -61,7 +61,7 @@ module.exports = {
         const newEmbed17 = new Discord.MessageEmbed()
         .setColor("#FF0000")
         .setDescription(`Leaving...`)
-        .setFooter(`${message.author.tag} has requested the bot to leave the current channel`)
+        .setFooter(`Requested by ${message.author.tag}`)
 
         const newEmbed18 = new Discord.MessageEmbed()
         .setColor("#008000")
@@ -73,6 +73,12 @@ module.exports = {
         .setDescription(`▶️ Resumed`)
         .setFooter(`Resumed by ${message.author.tag}`)
 
+        const newEmbed23 = new Discord.MessageEmbed()
+        .setColor("#008000")
+        .setDescription(`⏭️ Skipped`)
+        .setFooter(`Skipped by ${message.author.tag}`)
+
+
         const voice_channel = message.member.voice.channel;
         if (!voice_channel) return message.channel.send(newEmbed2);
         const permissions = voice_channel.permissionsFor(message.client.user);
@@ -80,7 +86,7 @@ module.exports = {
 
         const server_queue = queue.get(message.guild.id);
 
-        if (cmd === 'play'){
+        if (cmd === 'play' || cmd === 'p'){
             if (!args.length) return message.channel.send(newEmbed1);
 
             let song = {};
@@ -162,7 +168,40 @@ module.exports = {
             if(!server_queue){
                 message.channel.send(newEmbed10)
             }else{
-                skip_song(message, server_queue);
+                if(voice_channel.members.size >= 3){
+
+                    const requiredToSkip_notRounded = voice_channel.members.size * 0.75
+                    const requiredToSkip = Math.floor(requiredToSkip_notRounded)
+
+                    const newEmbed21 = new Discord.MessageEmbed()
+                    .setColor("#008000")
+                    .setTitle(`⏭️ Vote Skip`)
+                    .setDescription(`Click the ✅ if you would like to skip the song, otherwise click the ❌`)
+                    .setFooter(`Requested by ${message.author.tag} | Require ${requiredToSkip} people to vote ✅`)
+                    const messageEmbed = await message.channel.send(newEmbed21)
+                    messageEmbed.react('✅');
+                    messageEmbed.react('❌');
+                    setTimeout(function(){ 
+
+                        messageEmbed.delete()
+
+                        const wantToSkip = messageEmbed.reactions.cache.get('✅')
+
+                        if(wantToSkip >= requiredToSkip){
+                            message.channel.send(newEmbed23)
+                            skip_song(message, server_queue);
+                        }else{
+                            const newEmbed22 = new Discord.MessageEmbed()
+                            .setColor("#008000")
+                            .setDescription(`⏭️ Vote skip was unsuccessful`)
+                            .setFooter(`Requested by ${message.author.tag}`)
+                            message.channel.send(newEmbed22)
+                        }
+                    }, 5000);
+                }else{
+                    message.channel.send(newEmbed23)
+                    skip_song(message, server_queue);
+                }
             }
         }
         else if(cmd === 'stop'){
