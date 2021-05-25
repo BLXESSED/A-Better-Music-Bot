@@ -26,7 +26,7 @@ module.exports = {
 
         const newEmbed4 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setDescription('I could not find that song/video')
+        .setDescription('🔎 I could not find that song/video')
 
         const newEmbed6 = new Discord.MessageEmbed()
         .setColor("#FF0000")
@@ -46,21 +46,21 @@ module.exports = {
 
         const newEmbed13 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setDescription(`Stopping...`)
+        .setDescription(`🛑 Stopping...`)
         .setFooter(`Stopped by ${message.author.tag}`)
 
         const newEmbed14 = new Discord.MessageEmbed()
         .setColor("#008000")
-        .setDescription(`Joining...`)
+        .setDescription(`👍 Joining...`)
         .setFooter(`Requested by ${message.author.tag}`)
 
         const newEmbed16 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setDescription("Too many song are already in queue")
+        .setDescription("❌ Too many song are already in queue")
 
         const newEmbed17 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setDescription(`Leaving...`)
+        .setDescription(`👋 Leaving...`)
         .setFooter(`Requested by ${message.author.tag}`)
 
         const newEmbed18 = new Discord.MessageEmbed()
@@ -148,7 +148,7 @@ module.exports = {
                     const newEmbed11 = new Discord.MessageEmbed()
                     .setColor("#008000")
                     .setThumbnail(song.thumbnail)
-                    .setDescription(`Now playing **${song.title}**\n\nIf you enjoy using A Better Music Bot, please vote for our bot on [top.gg](https://top.gg/bot/832063705021284362/vote) to help keep our service free`)
+                    .setDescription(`<a:musicbeat:835354164782694440> Now playing **${song.title}**\n\nIf you enjoy using A Better Music Bot, please vote for our bot on [top.gg](https://top.gg/bot/832063705021284362/vote) to help keep our service free`)
                     .setFooter(`Requested by ${song.request}`)
                     message.channel.send(newEmbed11);
                     throw err;
@@ -168,7 +168,7 @@ module.exports = {
             if(!server_queue){
                 message.channel.send(newEmbed10)
             }else{
-                if(voice_channel.members.size >= 3){
+                if(voice_channel.members.size > 3){
 
                     const requiredToSkip_notRounded = voice_channel.members.size * 0.75
                     const requiredToSkip = Math.floor(requiredToSkip_notRounded)
@@ -192,12 +192,12 @@ module.exports = {
                             skip_song(message, server_queue);
                         }else{
                             const newEmbed22 = new Discord.MessageEmbed()
-                            .setColor("#008000")
-                            .setDescription(`⏭️ Vote skip was unsuccessful`)
+                            .setColor("#FF0000")
+                            .setDescription(`❌ Vote skip was unsuccessful`)
                             .setFooter(`Requested by ${message.author.tag}`)
                             message.channel.send(newEmbed22)
                         }
-                    }, 5000);
+                    }, 7000);
                 }else{
                     message.channel.send(newEmbed23)
                     skip_song(message, server_queue);
@@ -272,7 +272,7 @@ const video_player = async (guild, song, client) => {
     const newEmbed20 = new Discord.MessageEmbed()
     .setColor("#FFFFFF")
     .setThumbnail(song.thumbnail)
-    .setDescription(`Now playing **${song.title}**\n\nIf you enjoy using A Better Music Bot, please vote for our bot on [top.gg](https://top.gg/bot/832063705021284362/vote) to help keep our service free`)
+    .setDescription(`<a:musicbeat:835354164782694440> Now playing **${song.title}**\n\nIf you enjoy using A Better Music Bot, please vote for our bot on [top.gg](https://top.gg/bot/832063705021284362/vote) to help keep our service free`)
     .setFooter(`Requested by ${song.request}`)
     await song_queue.text_channel.send(newEmbed20)
 
