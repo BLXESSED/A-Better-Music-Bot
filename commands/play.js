@@ -8,7 +8,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 'join', 'nowplaying', 'leave', 'resume', 'pause', 'p' ],
+    aliases: ['skip', 'stop', 'join', 'nowplaying', 'leave', 'resume', 'pause', 'p', 'forcestop', 'forceskip' ],
     description: 'Advanced music bot',
     async execute(message, args, cmd, client, Discord){
 
@@ -22,7 +22,7 @@ module.exports = {
 
         const newEmbed3 = new Discord.MessageEmbed()
         .setColor("#FF0000")
-        .setDescription('You dont have the correct permissions')
+        .setDescription('You need the `CONNECT` permission to use this command')
 
         const newEmbed4 = new Discord.MessageEmbed()
         .setColor("#FF0000")
@@ -281,6 +281,26 @@ module.exports = {
         }else if(cmd === 'resume'){
             server_queue.connection.dispatcher.resume()
             message.channel.send(newEmbed19)
+        }else if(cmd === 'forceskip'){
+            if(permissions.has('MUTE_MEMBERS')){
+                message.channel.send(newEmbed23)
+                skip_song(message, server_queue);
+            }else{
+                const newEmbed24 = new Discord.MessageEmbed()
+                .setColor("#FF0000")
+                .setDescription('You need to have the `MUTE_MEMBERS` permission to force skip songs')
+                message.channel.send(newEmbed24)
+            }
+        }else if(cmd === 'forcestop'){
+            if(permissions.has('MUTE_MEMBERS')){
+                message.channel.send(newEmbed23)
+                skip_song(message, server_queue);
+            }else{
+                const newEmbed24 = new Discord.MessageEmbed()
+                .setColor("#FF0000")
+                .setDescription('You need to have the `MUTE_MEMBERS` permission to use this command')
+                message.channel.send(newEmbed24)
+            }
         }
     }
     
