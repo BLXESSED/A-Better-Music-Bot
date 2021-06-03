@@ -14,7 +14,7 @@ module.exports = {
 
         const newEmbed1 = new Discord.MessageEmbed()
         .setColor("#FFFFFF")
-        .setDescription("`m!play [song name or youtube/spotify link]`")
+        .setDescription("`m!play [keyword or youtube/spotify link]`")
 
         const newEmbed2 = new Discord.MessageEmbed()
         .setColor("#FF0000")
